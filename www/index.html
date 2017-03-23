@@ -9,7 +9,7 @@
 	<link href="css/main.css" rel="stylesheet">
     <title>LoL esportswikis Tool</title>
 </head>
-<body>
+<body ng-app="MatchHistoryApp">
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
@@ -22,13 +22,15 @@
             </div>
         </div>
     </div>
-    <div class="container body-content">
-		<h1>Hello</h1>
+    <div class="container body-content" ng-controller="CreateMHCtrl">
+		<h1>Create {{playersPerTeam}}</h1>
+		<create-match-history></create-match-history>
         <hr />
         <footer>
             <p class="text-center">&copy; 2017 AJ Angels</p>
         </footer>
     </div>
+	<!-- libraries -->
 	<script src="https://code.jquery.com/jquery-3.2.1.min.js"
 			integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" 
 			crossorigin="anonymous"></script>
@@ -36,5 +38,10 @@
 			integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" 
 			crossorigin="anonymous"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.3/angular.min.js"></script>
+	<!-- our js -->
+	<script src="js/main.js"></script>
+	<script src="js/app.js"></script>
+	<script src="js/app.js"></script>
+	<script src="js/controllers/createMH.controller.js"></script>
 </body>
 </html>
