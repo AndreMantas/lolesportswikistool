@@ -18,65 +18,44 @@
 </pre>
 -->
 <div class="row">
-	<!-- team 1 side -->
-	<div class="col-md-3">
-		<div class="form-group">
-			<label for="input-team-1" class="control-label">Team 1</label>
-			<input id="input-team-1" type="text" class="form-control" ng-model="teamA" />
-		</div>
-	</div>
-	<div class="col-md-3">
-		<div class="form-group">
-			<label for="input-score-team-1" class="control-label">Score</label>
-			<input id="input-score-team-1" type="number" class="form-control" ng-model="scoreTeamA" />
-		</div>
-	</div>
-	<!-- team 2 side -->
-	<div class="col-md-3">
-		<div class="form-group">
-			<label for="input-team-2" class="control-label">Team 2</label>
-			<input id="input-team-2" type="text" class="form-control" ng-model="teamB" />
-		</div>
-	</div>
-	<div class="col-md-3">
-		<div class="form-group">
-			<label for="input-score-team-2" class="control-label">Score</label>
-			<input id="input-score-team-2" type="number" class="form-control" ng-model="scoreTeamB" />
-		</div>
-	</div>
+    <div ng-repeat="team in teams track by $index">
+        <div class="col-md-3">
+            <div class="form-group">
+                <label for="input-team-{{$index+1}}" class="control-label">Team {{$index+1}}</label>
+                <input id="input-team-{{$index+1}}" type="text" class="form-control" ng-model="team.name" />
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-group">
+                <label for="input-score-team-{{$index+1}}" class="control-label">Score</label>
+                <input id="input-score-team-{{$index+1}}" type="number" class="form-control" ng-model="team.score" />
+            </div>
+        </div>
+    </div>
 </div>
 <!-- bans -->
 <div class="row form-inline">
-	<div class="col-md-3 text-center">
-		<h3>Bans Team 1</h3>
-		<div ng-repeat="n in bansPerTeam track by $index">
-			<label for="ban-{{n}}-team-1" class="control-label">Ban {{n}}</label>
-			<input id="ban-{{n}}-team-1" type="text" class="form-control" ng-model="blueBans[n]" />
-		</div>
-	</div>
-	<div class="col-md-3 text-center">
-		<h3>Picks Team 1</h3>
-		<div ng-repeat="n in playersPerTeam track by $index">
-			<label for="ban-{{n}}-team-1" class="control-label">Pick {{n}}</label>
-			<input id="pick-{{n}}-team-1" type="text" class="form-control" ng-model="bluePicks[n]" />
-		</div>
-	</div>
-	<div class="col-md-3 text-center">
-		<h3>Bans Team 2</h3>
-		<div ng-repeat="n in bansPerTeam track by $index">
-			<label for="ban-{{n}}-team-2" class="control-label">Ban {{n}}</label>
-			<input id="ban-{{n}}-team-2" type="text" class="form-control" ng-model="redBans[n]" />
-		</div>
-	</div>
-	<div class="col-md-3 text-center">
-		<h3>Picks Team 2</h3>
-		<div ng-repeat="n in playersPerTeam track by $index">
-			<label for="ban-{{n}}-team-2" class="control-label">Ban {{n}}</label>
-			<input id="ban-{{n}}-team-2" type="text" class="form-control" ng-model="redPicks[n]" />
-		</div>
-	</div>
+    <div ng-repeat="team in teams" ng-init="teamIndex = $index+1">
+        <div class="col-md-3 text-center">
+            <h3>Bans Team {{teamIndex}}</h3>
+            <div ng-repeat="n in bansPerTeam track by $index">
+                <label for="ban-{{n}}-team-{{teamIndex}}" class="control-label">Ban {{n}}</label>
+                <input id="ban-{{n}}-team-{{teamIndex}}" type="text" class="form-control" ng-model="team.bans[n-1]" />
+            </div>
+        </div>
+        <div class="col-md-3 text-center">
+            <h3>Picks Team {{teamIndex}}</h3>
+            <div ng-repeat="n in playersPerTeam track by $index">
+                <label for="ban-{{n}}-team-{{teamIndex}}" class="control-label">Pick {{n}}</label>
+                <input id="pick-{{n}}-team-{{teamIndex}}" type="text" class="form-control" ng-model="team.picks[n-1]" />
+            </div>
+        </div>
+    </div>
 </div>
 <!-- picks -->
+<pre>
+{{teams | json}}
+</pre>
 
 <!-- end -->
 <div class="row">
