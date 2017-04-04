@@ -36,19 +36,21 @@
         </div>
     </div>
 </div>
-<!-- bans -->
-<div class="row form-inline">
-    <div ng-repeat="team in teams" ng-init="teamIndex = $index+1">
+<div class="row form-inline form-group">
+    <!-- for each team create bans and picks -->
+    <div class="" ng-repeat="team in teams" ng-init="teamIndex = $index+1">
+        <!-- bans -->
         <div class="col-md-3 text-center">
             <h3>Bans Team {{teamIndex}}</h3>
-            <div ng-repeat="n in bansPerTeam track by $index">
+            <div class="form-group" ng-repeat="n in bansPerTeam track by $index">
                 <label for="ban-{{n}}-team-{{teamIndex}}" class="control-label">Ban {{n}}</label>
                 <input id="ban-{{n}}-team-{{teamIndex}}" type="text" class="form-control" ng-model="team.bans[n-1]" />
             </div>
         </div>
+        <!-- picks -->
         <div class="col-md-3 text-center">
             <h3>Picks Team {{teamIndex}}</h3>
-            <div ng-repeat="n in playersPerTeam track by $index">
+            <div class="form-group" ng-repeat="n in playersPerTeam track by $index">
                 <label for="ban-{{n}}-team-{{teamIndex}}" class="control-label">Pick {{n}}</label>
                 <input id="pick-{{n}}-team-{{teamIndex}}" type="text" class="form-control" ng-model="team.picks[n-1]" />
             </div>
@@ -59,8 +61,14 @@
 <!-- end -->
 <div class="row">
 	<div class="col-md-12">
-		<label for="match-history-output" class="control-label">Output</label>
-		<textarea id="match-history-output" class="form-control" ng-model="output" rows="10">
-		</textarea>
-	</div>
+        <div class="form-group">
+            <button class="btn btn-primary" ng-click="generateOutput()">
+                <span class="glyphicon glyphicon-wrench"></span> Generate
+            </button>
+        </div>
+        <div class="form-group">
+            <textarea id="match-history-output" class="form-control" ng-model="output" rows="10">
+		    </textarea>
+        </div>
+    </div>
 </div>
