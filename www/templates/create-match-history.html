@@ -17,42 +17,66 @@
 }}
 </pre>
 -->
-<pre>
-{{teams | json}}
-</pre>
-<div class="row">
-    <div ng-repeat="team in teams track by $index">
-        <div class="col-md-3">
+<div class="row form">
+    <div class="col-md-1"></div>
+    <div ng-repeat="team in game.teams track by $index">
+        <div class="col-md-2">
             <div class="form-group">
                 <label for="input-team-{{$index+1}}" class="control-label">Team {{$index+1}}</label>
                 <input id="input-team-{{$index+1}}" type="text" class="form-control" ng-model="team.name" />
             </div>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-2">
             <div class="form-group">
                 <label for="input-score-team-{{$index+1}}" class="control-label">Score</label>
                 <input id="input-score-team-{{$index+1}}" type="number" class="form-control" ng-model="team.score" />
             </div>
         </div>
-    </div>
-</div>
-<div class="row form-inline form-group">
-    <!-- for each team create bans and picks -->
-    <div class="" ng-repeat="team in teams" ng-init="teamIndex = $index+1">
-        <!-- bans -->
-        <div class="col-md-3 text-center">
-            <h3>Bans Team {{teamIndex}}</h3>
-            <div class="form-group" ng-repeat="n in bansPerTeam track by $index">
-                <label for="ban-{{n}}-team-{{teamIndex}}" class="control-label">Ban {{n}}</label>
-                <input id="ban-{{n}}-team-{{teamIndex}}" type="text" class="form-control" ng-model="team.bans[n-1]" />
+        <div class="col-md-2 form-group text-center" ng-if="$index == 0">
+            <!-- only show select winner once -->
+            <label class="control-label">Winner</label>
+            <div>
+                <label class="clickable">
+                    Blue
+                    <input type="radio" name="winner-radio" ng-model="game.winner" value="1" />
+                </label>
+                &nbsp;
+                <label class="clickable">
+                    <input type="radio" name="winner-radio" ng-model="game.winner" value="2" />
+                    Red
+                </label>
             </div>
         </div>
-        <!-- picks -->
-        <div class="col-md-3 text-center">
-            <h3>Picks Team {{teamIndex}}</h3>
-            <div class="form-group" ng-repeat="n in playersPerTeam track by $index">
-                <label for="ban-{{n}}-team-{{teamIndex}}" class="control-label">Pick {{n}}</label>
-                <input id="pick-{{n}}-team-{{teamIndex}}" type="text" class="form-control" ng-model="team.picks[n-1]" />
+    </div>
+    <div class="col-md-1"></div>
+</div>
+<div class="row form">
+    <!-- for each team create bans and picks -->
+    <div class="col-md-6" ng-repeat="team in teams" ng-init="teamIndex = $index+1">
+        <div class="row">
+            <!-- bans -->
+            <div class="col-md-4 text-center">
+                <h3>Bans Team {{teamIndex}}</h3>
+                <div class="form-group" ng-repeat="n in range(bansPerTeam) track by $index">
+                    <label for="ban-{{n}}-team-{{teamIndex}}" class="control-label">Ban {{n}}</label>
+                    <input id="ban-{{n}}-team-{{teamIndex}}" type="text" class="form-control" ng-model="team.bans[n-1]" />
+                </div>
+            </div>
+            <!-- picks -->
+            <div class="col-md-8 text-center">
+                <h3>Picks Team {{teamIndex}}</h3>
+                <div class="row">
+                    <div ng-repeat="n in range(playersPerTeam) track by $index">
+                        <div class="form-group col-md-6">
+                            <label for="pick-{{n}}-team-{{teamIndex}}" class="control-label">Pick {{n}}</label>
+                            <input id="pick-{{n}}-team-{{teamIndex}}" type="text" class="form-control" ng-model="team.picks[n-1].champ" />
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="role-{{n}}-team-{{teamIndex}}" class="control-label">Role {{n}}</label>
+                            <input id="role-{{n}}-team-{{teamIndex}}" type="text" class="form-control" ng-model="team.picks[n-1].role" />
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -72,3 +96,6 @@
         </div>
     </div>
 </div>
+<pre>
+{{game | json}}
+</pre>

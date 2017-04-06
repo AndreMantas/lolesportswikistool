@@ -4,30 +4,45 @@
     .directive('createMatchHistory', createMatchHistory);
 
 function CreateMHCtrl($scope, $http) {
-	
-    $scope.playersPerTeam = [1,2,3,4,5];
-    $scope.bansPerTeam = [1, 2, 3, 4, 5];
 
-    $scope.teams = [
-        {
-            // blue team
-            name: '',
-            score: 0,
-            players: [],
-            bans: [],
-            picks: [],
-            picksroles: []
-        },
-        {
-            // red team
-            name: '',
-            score: 0,
-            players: [],
-            bans: [],
-            picks: [],
-            picksroles: []
+    $scope.teamsPerGame = 2;
+    $scope.playersPerTeam = 5;
+    $scope.bansPerTeam = 5;
+
+    $scope.range = function (n) {
+        var result = [];
+        for (var i = 1; i <= n; i++) {
+            result.push(i);
         }
-    ];
+        return result;  
+    };
+
+    $scope.game = {
+        teams: [],
+        winner: '1', // team 1 is winner by default
+    };
+
+    $scope.teams = $scope.game.teams;
+
+    // init all team variables for all teams
+    for (var i = 0; i < $scope.teamsPerGame; i++) {
+        $scope.teams[i] = {
+            name: '',
+            score: 0,
+            bans: [],
+            picks: [],
+        };
+        for (var j = 0; j < $scope.bansPerTeam; j++) {
+            $scope.teams[i].bans[j] = '';
+        }
+        for (var j = 0; j < $scope.playersPerTeam; j++) {
+            $scope.teams[i].picks[j] = {
+                champ: '',
+                role: '',
+                // add player names here if necessary
+            };
+        }
+    }
 
     $scope.blueTeam = $scope.teams[0];
     $scope.redTeam = $scope.teams[1];
@@ -59,43 +74,44 @@ function CreateMHCtrl($scope, $http) {
             output = output.concat('| team'+n+'=' + $scope.teams[i].name);
             output = output.concat('| team'+n+'score=' + $scope.teams[i].score);
         }
-        output = output.concat('|winner=' + $scope.winner);
+        output = output.concat('|winner=' + $scope.game.winner);
         output += "\n";
         for (var i = 0; i < 3; i++) {
             output = output.concat('| blueban'+(i+1)+'=' + $scope.teams[0].bans[i]);
             output = output.concat('| redban'+(i+1)+'=' + $scope.teams[1].bans[i]);
             output += "\n";
         }
-        output = output.concat('| bluepick'+1+'=' + $scope.teams[0].picks[0]);
-        output = output.concat('| bluepickrole'+1+'=' + $scope.teams[0].picksroles[0]);
+        output = output.concat('| bluepick' + 1 + '=' + $scope.teams[0].picks[0].champ);
+        output = output.concat('| bluepickrole' + 1 + '=' + $scope.teams[0].picks[0].role);
+        output += "\n";
         for (var i = 0; i < 2; i++) {
-            output = output.concat('| redpick'+(i+1)+'=' + $scope.teams[0].picks[i]);
-            output = output.concat('| redpickrole'+(i+1)+'=' + $scope.teams[0].picksroles[i]);
+            output = output.concat('| redpick' + (i + 1) + '=' + $scope.teams[0].picks[i].champ);
+            output = output.concat('| redpickrole' + (i + 1) + '=' + $scope.teams[0].picks[i].role);
             output += "\n";
         }
         for (var i = 1; i <3; i++) {
-            output = output.concat('| bluepick'+(i+1)+'=' + $scope.teams[0].picks[i]);
-            output = output.concat('| bluepickrole'+(i+1)+'=' + $scope.teams[0].picksroles[i]);
+            output = output.concat('| bluepick' + (i + 1) + '=' + $scope.teams[0].picks[i].champ);
+            output = output.concat('| bluepickrole' + (i + 1) + '=' + $scope.teams[0].picks[i].role);
             output += "\n";
         }
-        output = output.concat('| redpick'+3+'=' + $scope.teams[0].picks[2]);
-        output = output.concat('| redpickrole'+3+'=' + $scope.teams[0].picksroles[2]);
+        output = output.concat('| redpick' + 3 + '=' + $scope.teams[0].picks[2].champ);
+        output = output.concat('| redpickrole' + 3 + '=' + $scope.teams[0].picks[2].role);
         output += "\n";
         for (var i = 3; i <5; i++) {
             output = output.concat('| blueban'+(i+1)+'=' + $scope.teams[0].bans[i]);
             output = output.concat('| redban'+(i+1)+'=' + $scope.teams[1].bans[i]);
             output += "\n";
         }
-        output = output.concat('| redpick'+4+'=' + $scope.teams[0].picks[3]);
-        output = output.concat('| redpickrole'+4+'=' + $scope.teams[0].picksroles[3]);
+        output = output.concat('| redpick' + 4 + '=' + $scope.teams[0].picks[3].champ);
+        output = output.concat('| redpickrole' + 4 + '=' + $scope.teams[0].picks[3].role);
         output += "\n";
         for (var i = 3; i <5; i++) {
-            output = output.concat('| bluepick'+(i+1)+'=' + $scope.teams[0].picks[i]);
-            output = output.concat('| bluepickrole'+(i+1)+'=' + $scope.teams[0].picksroles[i]);
+            output = output.concat('| bluepick' + (i + 1) + '=' + $scope.teams[0].picks[i].champ);
+            output = output.concat('| bluepickrole' + (i + 1) + '=' + $scope.teams[0].picks[i].role);
             output += "\n";
         }
-        output = output.concat('| redpick'+5+'=' + $scope.teams[0].picks[4]);
-        output = output.concat('| redpickrole'+5+'=' + $scope.teams[0].picksroles[4]);
+        output = output.concat('| redpick' + 5 + '=' + $scope.teams[0].picks[4].champ);
+        output = output.concat('| redpickrole' + 5 + '=' + $scope.teams[0].picks[4].role);
         output += "\n}}";
         
         $scope.output = output;
