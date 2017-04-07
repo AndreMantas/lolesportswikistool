@@ -89,6 +89,12 @@
             <button class="btn btn-primary" ng-click="generateOutput()">
                 <span class="glyphicon glyphicon-wrench"></span> Generate
             </button>
+            <button class="btn btn-info" ng-click="copyOutput()">
+                <span class="glyphicon glyphicon-copy"></span> Copy
+            </button>
+            <button class="btn btn-danger" ng-click="clearOutput()">
+                <span class="glyphicon glyphicon-fire"></span> Clear
+            </button>
         </div>
         <div class="form-group">
             <textarea id="match-history-output" class="form-control" ng-model="output" rows="10">
