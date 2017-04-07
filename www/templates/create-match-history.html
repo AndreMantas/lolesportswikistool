@@ -59,7 +59,7 @@
                 <h3>Bans Team {{teamIndex}}</h3>
                 <div class="form-group" ng-repeat="n in range(bansPerTeam) track by $index">
                     <label for="ban-{{n}}-team-{{teamIndex}}" class="control-label">Ban {{n}}</label>
-                    <input id="ban-{{n}}-team-{{teamIndex}}" type="text" class="form-control" ng-model="team.bans[n-1]" />
+                    <input id="ban-{{n}}-team-{{teamIndex}}" list="championlist" type="text" class="form-control" ng-model="team.bans[n-1]" />
                 </div>
             </div>
             <!-- picks -->
@@ -69,7 +69,7 @@
                     <div ng-repeat="n in range(playersPerTeam) track by $index">
                         <div class="form-group col-md-6">
                             <label for="pick-{{n}}-team-{{teamIndex}}" class="control-label">Pick {{n}}</label>
-                            <input id="pick-{{n}}-team-{{teamIndex}}" type="text" class="form-control" ng-model="team.picks[n-1].champ" />
+                            <input id="pick-{{n}}-team-{{teamIndex}}" list="championlist"  type="text" class="form-control" ng-model="team.picks[n-1].champ" />
                         </div>
                         <div class="form-group col-md-6">
                             <label for="role-{{n}}-team-{{teamIndex}}" class="control-label">Role {{n}}</label>
