@@ -116,6 +116,10 @@ function CreateMHCtrl($scope, $http) {
         
         $scope.output = output;
     };
+    
+    $scope.clearOutput = function() {
+        $scope.output = "";
+    };
 
     //$scope.getCardsList = function () {
         //$http.get("...")
