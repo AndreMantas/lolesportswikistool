@@ -16,3 +16,17 @@ function toTitleCase(str)
 {
     return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
 }
+
+/** copy button */
+var clipboard = new Clipboard('button.btn');
+
+clipboard.on('success', function(e) {
+	e.clearSelection();
+	$("body").scrollTop(0);
+});
+
+clipboard.on('error', function(e) {
+	alert("Error copying! Use control+c instead");
+});
+
+/* End Copy Button */
